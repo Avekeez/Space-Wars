@@ -52,16 +52,16 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private SpriteBatch batch;
 		
 		//base
-		private static RedBase mRedbase = new RedBase();
-		private static BlueBase mBluebase = new BlueBase();
+		public static RedBase mRedbase = new RedBase();
+		public static BlueBase mBluebase = new BlueBase();
 		
 		//background
 		private Texture tex_space;
 		private Sprite spr_space;
 		
 		//AITest
-		private static Boolean inSoloMode = false;
-		private static Boolean inDuelMode = false;
+		public static Boolean inSoloMode = true;
+		public static Boolean inDuelMode = false;
 		
 		
 		//menu + Win screen +credits
@@ -89,11 +89,11 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			private static Texture tex_duel;
 			private static Sprite spr_duel;
 		//lanes
-		private static int lane1 = ((178-32)*2)+120;//y value
-		private static int lane2 = (178*2)+120; //y value
-		private static int lane3 = ((178+32)*2)+120;//y value
-		private static int blueSelected;
-		private static int redSelected;
+		public static int lane1 = ((178-32)*2)+120;//y value
+		public static int lane2 = (178*2)+120; //y value
+		public static int lane3 = ((178+32)*2)+120;//y value
+		public static int blueSelected;
+		public static int redSelected;
 		
 		//keypushes
 		private static Boolean Q = false;
@@ -141,8 +141,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		private static int rcurrentTick;
 		
 		//resouces variables
-		private static int blueMoney;
-		private static int redMoney;
+		public static int blueMoney;
+		public static int redMoney;
 		
 		//font
 		private static BitmapFont font;
@@ -153,6 +153,11 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		
 		//sounds
 		protected SoundPlayer sounds;
+		
+		//MechaShip
+		public static Robot robot = new Robot(new SpaceWarsCore());
+		
+		public static int shipsInLane1 = 0, shipsInLane2 = 0, shipsInLane3 = 0;
 		
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
@@ -165,7 +170,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			lane1 = Constants.display_height/2+64; 
 			lane2 =Constants.display_height/2;
 			lane3 = Constants.display_height/2-64;
-			
 				
 			//music\\
 			music=new MusicPlayer();
@@ -306,7 +310,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//red stuff
 			mRedbase.setPlace((Constants.display_width/4)*3, (Constants.display_height/2)-48);
 			//blue stuff
-			mBluebase.setPlace(Constants.display_width/4, (Constants.display_height/2)-48);		
+			mBluebase.setPlace(Constants.display_width/4, (Constants.display_height/2)-48);
 		}
 		
 		@Override
@@ -321,7 +325,6 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-			
 
 			///drawing. The ones drawn first are behind the others
 			batch.begin();
@@ -473,6 +476,9 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			
 			//update keys
 			updateKeys();
+			
+			//update MechaShip
+			robot.update();
 			
 			//get right selected variable
 			getLane();
@@ -728,6 +734,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 								Statistics.blueSuicideShipCreation +=1;
 								blueMoney-=5;
 								cooldown = Constants.shipCool;
+								robot.pushBuilt(1);
+								setLaneQuant(blueSelected, true);
 								break;
 							}
 							
@@ -749,6 +757,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 								Statistics.blueShooterShipCreation += 1;
 								blueMoney-=10;
 								cooldown = Constants.shipCool+10;
+								robot.pushBuilt(2);
+								setLaneQuant(blueSelected, true);
 								break;
 							}
 							
@@ -769,6 +779,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 								Statistics.blueBlockerShipCreation += 1;
 								blueMoney-=15;
 								cooldown = Constants.shipCool * 2;
+								robot.pushBuilt(3);
+								setLaneQuant(blueSelected, true);
 								break;
 							}
 							
@@ -788,7 +800,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//----RED----\\
 			//suicide ship
 			if (inSoloMode) {
-				if (AITest.createAISuicideShip==true){
+				if (robot.createAISuicideShip==true){
 					//goes through the list of ships
 					for(int len = allRShips.size(), i = 0; i < len; i++) {
 						//gets current ship
@@ -803,6 +815,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 									Statistics.redSuicideShipCreation += 1;
 									cooldown2=Constants.shipCool;
 									redMoney-=5;
+									robot.createAISuicideShip = false;
+									robot.deselectLane(redSelected);
 									break;
 									}
 								
@@ -812,7 +826,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 					}
 				//shooter ship
 				//same as suicide ship
-					if (AITest.createAIShooterShip==true){
+					if (robot.createAIShooterShip==true){
 						for(int len = allRShips.size(), i = 0; i < len; i++) {
 							BaseshipObject ship = allRShips.get(i);
 							if (ship.getType().equals(ShipTypes.ShooterShip)){
@@ -824,6 +838,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 										Statistics.redShooterShipCreation += 1;
 										cooldown2=Constants.shipCool+10;
 										redMoney-=10;
+										robot.createAIShooterShip = false;
+										robot.deselectLane(redSelected);
 										break;
 									}
 								
@@ -832,7 +848,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						}
 					}
 				//blocker ship
-					if (AITest.createAIBlockerShip==true){
+					if (robot.createAIBlockerShip==true){
 						for(int len = allRShips.size(), i = 0; i < len; i++) {
 							BaseshipObject ship = allRShips.get(i);
 							if (ship.getType().equals(ShipTypes.BlockerShip)){
@@ -844,6 +860,8 @@ public class SpaceWarsCore extends ApplicationAdapter{
 										Statistics.redBlockerShipCreation += 1;
 										cooldown2 = Constants.shipCool * 2;
 										redMoney-=15;
+										robot.createAIBlockerShip = false;
+										robot.deselectLane(redSelected);
 										break;
 									}
 								
@@ -933,6 +951,47 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			}
 			if (redMoney>Constants.maxmoney) {
 				redMoney=Constants.maxmoney;
+			}
+		}
+		//stuff to make ai easier
+		public int getBlueSelectedLane() {
+			return blueSelected;
+		}
+		public boolean getQ() {
+			return Q;
+		}
+		public boolean getW() {
+			return W;
+		}
+		public boolean getE() {
+			return E;
+		}
+		public int getBlueMoney() {
+			return blueMoney;
+		}
+		public static void setLaneQuant(int lane, boolean add) {
+			switch (lane) {
+			case ((178-32)*2)+120:
+				if (add) {
+					shipsInLane1 ++;
+				} else {
+					shipsInLane1 --;
+				}
+				break;
+			case (178*2)+120:
+				if (add) {
+					shipsInLane2 ++;
+				} else {
+					shipsInLane2 --;
+				}
+				break;
+			case ((178+32)*2)+120:
+				if (add) {
+					shipsInLane3 ++;
+				} else {
+					shipsInLane3 --;
+				}
+				break;
 			}
 		}
 }

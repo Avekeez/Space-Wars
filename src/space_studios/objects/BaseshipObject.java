@@ -3,6 +3,7 @@ package space_studios.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import space_studios.core.SpaceWarsCore;
 import space_studios.objects.Statistics;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -163,7 +164,10 @@ public class BaseshipObject {
 				}
 			if (this.Blue) {
 				Statistics.redKills += 1;
+				if (SpaceWarsCore.inSoloMode) {
+					SpaceWarsCore.setLaneQuant((int)Y, false);
 				}
+			}
 			if (otherShip.Blue) {
 				Statistics.blueKills += 1;
 				}
