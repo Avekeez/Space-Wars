@@ -533,13 +533,13 @@ public class SpaceWarsCore extends ApplicationAdapter{
 				blueSelected = lane3;
 			}
 			if (inSoloMode) {
-				if (AITest.lane1) {
+				if (robot.lane1) {
 					redSelected = lane1;
 				}
-				if (AITest.lane2) {
+				if (robot.lane2) {
 					redSelected = lane2;
 				}
-				if (AITest.lane3) {
+				if (robot.lane3) {
 					redSelected = lane3;
 				}
 			} else if (inDuelMode) {
