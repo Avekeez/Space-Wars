@@ -20,6 +20,5 @@ public class DesktopLauncher {
 		config.fullscreen=Constants.fullscreen;
 		//This line creates the window after all the variables have been set
 		new LwjglApplication(new SpaceWarsCore(), config);
-		
 	}
 }

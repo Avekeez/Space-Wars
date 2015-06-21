@@ -21,7 +21,7 @@ public class BlockerShip extends BaseshipObject {
 		Life = Constants.bShipLife;
 		Damage = Constants.bShipDam;
 		Mask = new Rectangle (0.0f,0.0f,64.0f,32.0f);
-		Texture = new Texture(Gdx.files.internal("sprites/Ships & Bases/Blue Sprites/Ships/Basic Blocker.png"));
+		Texture = new Texture(Gdx.files.internal("assets/sprites/Ships & Bases/Blue Sprites/Ships/Basic Blocker.png"));
 		Sprite = new Sprite(Texture,0,0,64,32);
 		Blue=true; 
 		Speed=1;

@@ -11,9 +11,9 @@ public class SoundPlayer {
 	
 	public void init(){
 		
-		boom = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
-		shootshipLaunch = Gdx.audio.newSound(Gdx.files.internal("sounds/ship_launch_2.wav"));
-		win = Gdx.audio.newSound(Gdx.files.internal("sounds/win.wav"));
+		boom = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/explosion.wav"));
+		shootshipLaunch = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/ship_launch_2.wav"));
+		win = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/win.wav"));
 		
 	}
 	public void playBoom(){

@@ -33,29 +33,29 @@ public class Boom {
 	
 	public void Init(){
 		//texture and sprite adding
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 1.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 1.png")));
 		sprite.add(new Sprite(texture.get(0),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 2.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 2.png")));
 		sprite.add(new Sprite(texture.get(1),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 3.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 3.png")));
 		sprite.add(new Sprite(texture.get(2),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 4.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 4.png")));
 		sprite.add(new Sprite(texture.get(3),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 5.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 5.png")));
 		sprite.add(new Sprite(texture.get(4),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 6.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 6.png")));
 		sprite.add(new Sprite(texture.get(5),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 7.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 7.png")));
 		sprite.add(new Sprite(texture.get(6),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 8.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 8.png")));
 		sprite.add(new Sprite(texture.get(7),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 9.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 9.png")));
 		sprite.add(new Sprite(texture.get(8),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 10.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 10.png")));
 		sprite.add(new Sprite(texture.get(9),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 11.png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 11.png")));
 		sprite.add(new Sprite(texture.get(10),0,0,128,128));
-		texture.add(new Texture(Gdx.files.internal("sprites/Fiery Explotion/frame 12 (not necessary).png")));
+		texture.add(new Texture(Gdx.files.internal("assets/sprites/Fiery Explotion/frame 12 (not necessary).png")));
 		sprite.add(new Sprite(texture.get(11),0,0,128,128));
 	}
 	

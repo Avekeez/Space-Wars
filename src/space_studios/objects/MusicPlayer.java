@@ -8,7 +8,7 @@ public class MusicPlayer {
 	//84.37
 	public void init(){
 		long musicID = 0L;
-		music = Gdx.audio.newSound(Gdx.files.internal("sounds/Music.wav"));
+		music = Gdx.audio.newSound(Gdx.files.internal("assets/sounds/Music.wav"));
 		musicID = music.play();
 		music.setLooping(musicID, true);
 		music.setVolume(musicID, 0.2f);

@@ -154,14 +154,17 @@ public class SpaceWarsCore extends ApplicationAdapter{
 		//sounds
 		protected SoundPlayer sounds;
 		
-		//MechaShip
-		public static Robot robot = new Robot(new SpaceWarsCore());
+		//hal-9000
+		public static Robot robot;
 		
 		public static int shipsInLane1 = 0, shipsInLane2 = 0, shipsInLane3 = 0;
 		
 		// EPIC TIP: 0,0 is the lower left hand corner
 		@Override
 		public void create () {
+			
+			//initialize hal-9000
+			robot = new Robot(this);
 			//allows you to use constants
 			Constants.setSize(Gdx.graphics.getDesktopDisplayMode().width,Gdx.graphics.getDesktopDisplayMode().height);
 			//FULLSCREEN LINE, this enables fullscreen for your computer\\
@@ -259,36 +262,36 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			batch=new SpriteBatch();
 	
 			//background for the game
-			tex_space = new Texture(Gdx.files.internal("sprites/SPACE!!!!!.png"));
+			tex_space = new Texture(Gdx.files.internal("assets/sprites/SPACE!!!!!.png"));
 			spr_space = new Sprite(tex_space,0,0,1024*2,1080);
 			
 			//sets credits
-			tex_Credits = new Texture(Gdx.files.internal("sprites/Credits.png"));
+			tex_Credits = new Texture(Gdx.files.internal("assets/sprites/Credits.png"));
 			spr_Credits = new Sprite(tex_Credits,0,0,1920,3420);
 			creditsWait = 0;
 			creditsMoving = false;
 			creditsYPosition = -2160;
 			
 			//red lose and blue lose screens
-			tex_BlueWins = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Win Screen/Player 1 Blue Wins Screen.png"));
+			tex_BlueWins = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Win Screen/Player 1 Blue Wins Screen.png"));
 			spr_BlueWins = new Sprite(tex_BlueWins,0,0,1920,1080);
-			tex_RedWins = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Win Screen/Player 2 Red Wins Screen.png"));
+			tex_RedWins = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Win Screen/Player 2 Red Wins Screen.png"));
 			spr_RedWins = new Sprite(tex_RedWins,0,0,1920,1080);
 			
 			
 			//title
-			tex_title = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/Title Screen Image .png"));
+			tex_title = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/Title Screen Image .png"));
 			spr_title = new Sprite(tex_title,0,0,1920,1080);
 			
 			//Start Button Dual
-			tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartA.png"));
+			tex_duel = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/StartA.png"));
 			spr_duel = new Sprite(tex_duel);
 			spr_duel.setPosition(Constants.display_width/5,Constants.display_height/4);
 			
 			//statistics
-			tex_StatisticsBLU = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Statistics Screen/Statistics Screen BLUEWON.png"));
+			tex_StatisticsBLU = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Statistics Screen/Statistics Screen BLUEWON.png"));
 			spr_StatisticsBLU = new Sprite(tex_StatisticsBLU,0,0,1920,1080);
-			tex_StatisticsRED = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Statistics Screen/Statistics Screen REDWON.png"));
+			tex_StatisticsRED = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Statistics Screen/Statistics Screen REDWON.png"));
 			spr_StatisticsRED = new Sprite(tex_StatisticsRED,0,0,1920,1080);
 			
 			//resizes all of the screens to your screen size\\
@@ -477,7 +480,7 @@ public class SpaceWarsCore extends ApplicationAdapter{
 			//update keys
 			updateKeys();
 			
-			//update MechaShip
+			//update hal
 			robot.update();
 			
 			//get right selected variable
@@ -661,17 +664,17 @@ public class SpaceWarsCore extends ApplicationAdapter{
 						Constants.display_height - Gdx.input.getY() 
 						< (Constants.display_height/5)+64)
 				{
-					tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartB.png"));
+					tex_duel = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/StartB.png"));
 					spr_duel = new Sprite(tex_duel);
 					spr_duel.setPosition(Constants.display_width/2 -128,Constants.display_height/5 - 64);
 					return true;
 				}
-				tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartA.png"));
+				tex_duel = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/StartA.png"));
 				spr_duel = new Sprite(tex_duel);
 				spr_duel.setPosition(Constants.display_width/2-128,Constants.display_height/5-64);
 				return false;
 			}
-			tex_duel = new Texture(Gdx.files.internal("sprites/Menu & Title Screens/Title Screen/StartA.png"));
+			tex_duel = new Texture(Gdx.files.internal("assets/sprites/Menu & Title Screens/Title Screen/StartA.png"));
 			spr_duel = new Sprite(tex_duel);
 			spr_duel.setPosition(Constants.display_width/2 - 128,Constants.display_height/5 - 64);
 			return false;
